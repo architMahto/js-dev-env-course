@@ -4,9 +4,9 @@
   "description": "JavaScript development environment Pluralsight course",
   "main": "server.js",
   "scripts": {
-    "prestart": "node scripts/start-message.js",
+    "prestart": "babel-node scripts/start-message.js",
     "start": "npm-run-all --parallel security-check open:src",
-    "open:src": "node server.js",
+    "open:src": "babel-node server.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel"
