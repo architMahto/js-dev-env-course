@@ -6,8 +6,10 @@
   "scripts": {
     "build": "npm run clean && webpack --config webpack.config.dev.js",
     "clean": "rimraf dist",
+    "lint": "esw webpack.config.* src scripts --color",
+    "lint:watch": "npm run lint -- --watch",
     "prestart": "npm run build && babel-node scripts/start-message.js",
-    "start": "npm-run-all --parallel security-check open:src",
+    "start": "npm-run-all --parallel security-check open:src lint:watch",
     "open:src": "babel-node server.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
