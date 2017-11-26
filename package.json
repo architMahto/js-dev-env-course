@@ -9,12 +9,13 @@
     "lint": "esw webpack.config.* src scripts --color",
     "lint:watch": "npm run lint -- --watch",
     "prestart": "npm run build && babel-node scripts/start-message.js",
-    "start": "npm-run-all --parallel security-check open:src lint:watch",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
     "open:src": "babel-node server.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel",
-    "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.test.js\""
+    "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
