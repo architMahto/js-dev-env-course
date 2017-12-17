@@ -6,14 +6,17 @@
   "scripts": {
     "build": "npm run clean && webpack --config webpack.config.dev.js",
     "clean": "rimraf dist",
+    "generate-mock-data": "babel-node scripts/generate-mock-data.js",
     "lint": "esw webpack.config.* src scripts --color",
     "lint:watch": "npm run lint -- --watch",
-    "prestart": "npm run build && babel-node scripts/start-message.js",
-    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
     "open:src": "babel-node server.js",
+    "prestart": "npm run build && babel-node scripts/start-message.js",
+    "prestart-mockapi": "npm run generate-mock-data",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch start-mockapi",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001",
     "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
@@ -45,6 +48,9 @@
     "extract-text-webpack-plugin": "^2.0.0",
     "html-webpack-plugin": "^2.22.0",
     "jsdom": "9.4.2",
+    "json-schema": "0.2.3",
+    "json-schema-faker": "0.4.6",
+    "json-server": "0.12.1",
     "localtunnel": "1.8.1",
     "mocha": "3.0.2",
     "nock": "8.0.0",
@@ -55,6 +61,7 @@
     "rimraf": "2.5.4",
     "style-loader": "0.19.0",
     "webpack": "2.2.0",
-    "webpack-dev-server": "2.2.0"
+    "webpack-dev-server": "2.2.0",
+    "whatwg-fetch": "2.0.3"
   }
 }
