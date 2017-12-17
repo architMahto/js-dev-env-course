@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// This for real production API.
 app.get('/users', (req, res) => {
   // Hard coding for simplicity. Pretend this hits a real database
   res.json([

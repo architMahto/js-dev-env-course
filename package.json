@@ -11,10 +11,12 @@
     "lint:watch": "npm run lint -- --watch",
     "open:src": "babel-node server.js",
     "prestart": "npm run build && babel-node scripts/start-message.js",
+    "prestart-mockapi": "npm run generate-mock-data",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel",
-    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch start-mockapi",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001",
     "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
