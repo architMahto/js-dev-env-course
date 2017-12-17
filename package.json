@@ -6,14 +6,15 @@
   "scripts": {
     "build": "npm run clean && webpack --config webpack.config.dev.js",
     "clean": "rimraf dist",
+    "generate-mock-data": "babel-node scripts/generate-mock-data.js",
     "lint": "esw webpack.config.* src scripts --color",
     "lint:watch": "npm run lint -- --watch",
-    "prestart": "npm run build && babel-node scripts/start-message.js",
-    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
     "open:src": "babel-node server.js",
+    "prestart": "npm run build && babel-node scripts/start-message.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
     "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
