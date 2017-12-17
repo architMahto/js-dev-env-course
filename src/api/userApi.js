@@ -3,6 +3,18 @@ import getBaseUrl from './baseUrl';
 
 const baseUrl = getBaseUrl();
 
+export function deleteUser(id) {
+  return del(`users/${id}`);
+}
+
+export function del(url) {
+  const request = new Request(baseUrl + url, {
+    method: 'DELETE'
+  });
+
+  return fetch(request).then(onSuccess, onError);
+}
+
 export function getUsers() {
   return get('users');
 }
